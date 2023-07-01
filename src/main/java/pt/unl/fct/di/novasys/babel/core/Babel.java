@@ -528,16 +528,20 @@ public class Babel {
         if (protoid==100){
             if (t.getId()==101){// 是batch定时发送时钟
                 timerQueue.add(newTimer);
+                timersThread.interrupt();
             }
         }else if (protoid==200){
             if (t.getId()==202){// leader超时时钟  5000ms
                 timerQueue4.add(newTimer);
+                timersThread4.interrupt();
             }
             if (t.getId()==203){// noop 100ms
                 timerQueue2.add(newTimer);
+                timersThread2.interrupt();
             }
         }else {
             timerQueue3.add(newTimer);
+            timersThread3.interrupt();
         }
         return id;
     }
@@ -557,23 +561,29 @@ public class Babel {
         if (protoid==100){
             if (t.getId()==204){ // 是重连挂载节点时钟  1000 ms
                 timerQueue3.add(newTimer);
+                timersThread3.interrupt();
             }
         }else if (protoid==200){
             if (t.getId()==201){// jointime时钟  3000ms
                 timerQueue4.add(newTimer);
+                timersThread4.interrupt();
             }
             if (t.getId()==205){// StateTransferTimer时钟  5000ms
                 timerQueue4.add(newTimer);
+                timersThread4.interrupt();
             }
             if (t.getId()==204){// 重连时钟  1000ms
                 timerQueue3.add(newTimer);
+                timersThread3.interrupt();
             }
         }else {
             if (t.getId()==304){// 重新连接其他节点Data层的时钟 1000ms
                 timerQueue3.add(newTimer);
+                timersThread3.interrupt();
             }
             if (t.getId()==206){//是刷新闹钟     100ms
                 timerQueue2.add(newTimer);
+                timersThread2.interrupt();
             }
         }
         return id;
@@ -596,18 +606,22 @@ public class Babel {
             timersThread.interrupt();
         }else if (protoid==200){
             if (tE.getTimer().getId()==202){// leader超时时钟  5000ms
-                timersThread4.interrupt();
                 timerQueue4.remove(tE);
+                timersThread4.interrupt();
             }
             if (tE.getTimer().getId()==201){// jointime时钟  3000ms
+       
                 timerQueue4.remove(tE);
+                timersThread4.interrupt();
             }
             if (tE.getTimer().getId()==205){// StateTransferTimer时钟  5000ms
                 timerQueue4.remove(tE);
+                timersThread4.interrupt();
             }
         }else {
             if (tE.getTimer().getId()==206){//是刷新闹钟     100ms
                 timerQueue2.remove(tE);
+                timersThread2.interrupt();
             }
         }
         return tE.getTimer();
