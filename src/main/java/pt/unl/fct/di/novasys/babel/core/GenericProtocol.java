@@ -888,16 +888,17 @@ public abstract class GenericProtocol {
      * Used by babel to deliver requests/replies to protocols. Do not evoke directly.
      */
     final void deliverIPC(IPCEvent ipc) {
-        if (protoId!=100 && protoId!=200){
-            if(ipc.getIpc().getType()==ProtoIPC.Type.REQUEST){
-                // 只有这一种情况 ：是Front层发过来的ipc写
-                ipcqueue.add(ipc);
-            }else {
-                queue.add(ipc);
-            }
-        } else {
-            queue.add(ipc);
-        }
+        queue.add(ipc);
+        //if (protoId!=100 && protoId!=200){
+        //    if(ipc.getIpc().getType()==ProtoIPC.Type.REQUEST){
+        //        // 只有这一种情况 ：是Front层发过来的ipc写
+        //        ipcqueue.add(ipc);
+        //    }else {
+        //        queue.add(ipc);
+        //    }
+        //} else {
+        //    queue.add(ipc);
+        //}
     }
 
 
